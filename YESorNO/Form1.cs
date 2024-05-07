@@ -19,12 +19,14 @@ namespace YESorNO
 
         private void btnGenerate_Click(object sender, EventArgs e)
         {
+            if(string.IsNullOrEmpty(questionTextBox.Text)) { MessageBox.Show("Введите вопрос"); return;  }
             double p = 0.5;  // вероятность
             Random rand = new Random();
-            bool result = rand.NextDouble() < p;  // Генерация результата с вероятностью p
+            bool result = rand.NextDouble() <= p;  // Генерация результата с вероятностью p
             
-            resultListBox.Items.Clear();
-            resultListBox.Items.Add(result ? "Да" : "Нет");
+            resultTextBox.Clear();
+            resultTextBox.AppendText(questionTextBox.Text + " - " + (result ? "Да" : "Нет") + "\r\n");
+            questionTextBox.Clear();
         }
     }
 }
